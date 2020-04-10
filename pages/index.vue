@@ -6,7 +6,18 @@
     <hr />
     <pre>[{{now}}]</pre>
     <hr />
-    <!-- <p>{{ $store.state.message }}</p> -->
+    <hr />
+    <p>{{ $store.state.message }}</p>
+    <hr />
+    <!-- <div
+      class="link"
+      @click.exact="$store.commit({type:'count',message:'add 1!', add:1})"
+      @click.alt.exact="$store.commit({type:'count',message:'add 5!', add:5})"
+      @click.meta.exact="$store.commit({type:'count',message:'add 10!', add:10})"
+    >-->
+    <div class="link" @click="$store.dispatch('doit')">
+      <a @click.stop="$store.commit('reset')">clicked: {{$store.state.counter}}</a>
+    </div>
   </section>
 </template>
 
@@ -25,6 +36,11 @@ export default {
       this.now = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     }, 1000);
   }
+  // methods: {
+  //   doCount: function() {
+  //     this.$store.state.counter++;
+  //   }
+  // }
 };
 </script>
 
@@ -51,5 +67,9 @@ hr {
 }
 a {
   font-size: 16pt;
+}
+.link {
+  background-color: #def;
+  padding: 10px;
 }
 </style>

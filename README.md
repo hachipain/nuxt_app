@@ -5,6 +5,8 @@
 ```bash
 # create nuxt.js project
 $ npx create-nuxt-app nuxt_app
+
+npm install vuex-persistedstate
 ```
 
 ## Build Setup
