@@ -6,7 +6,9 @@
 # create nuxt.js project
 $ npx create-nuxt-app nuxt_app
 
-npm install vuex-persistedstate
+$ npm install vuex-persistedstate
+
+$ npm install --save axios
 ```
 
 ## Build Setup

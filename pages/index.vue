@@ -3,6 +3,7 @@
     <h1>{{title}}</h1>
     <p>{{message}}</p>
     <router-link to="/other">Go to Other</router-link>
+    <router-link to="/axios">Go to Axios</router-link>
     <hr />
     <pre>[{{now}}]</pre>
     <hr />
