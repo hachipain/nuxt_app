@@ -12,6 +12,40 @@
       <button @click="doRange">Age range</button>
     </div>
     <hr />
+    <table>
+      <tr>
+        <th>Email</th>
+        <td>
+          <input type="text" v-model="email" />
+        </td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <td>
+          <input type="text" v-model="username" />
+        </td>
+      </tr>
+      <tr>
+        <th>Age</th>
+        <td>
+          <input type="number" v-model="age" />
+        </td>
+      </tr>
+      <tr>
+        <th>Tel</th>
+        <td>
+          <input type="text" v-model="tel" />
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <button @click="addData">Add</button>
+          <button @click="deleteData">Delete</button>
+        </td>
+      </tr>
+    </table>
+    <hr />
     <!-- <pre>{{html_data}}</pre> -->
     <!-- <table>
       <tr>
@@ -57,7 +91,7 @@ const axios = require("axios");
 
 // let url = "/README.md";
 // let url = "https://jsonplaceholder.typicode.com/posts/";
-// let url = "https://nuxt-firebase-sample-e3b55.firebaseio.com/person.json";
+let all_url = "https://nuxt-firebase-sample-e3b55.firebaseio.com/person";
 // let url = "https://nuxt-firebase-sample-e3b55.firebaseio.com/person/";
 let url =
   "https://nuxt-firebase-sample-e3b55.firebaseio.com/person.json?orderBy=%22$key%22&equalTo=%22";
@@ -70,7 +104,11 @@ export default {
       message: "axios sample",
       msg: "",
       json_data: {},
-      age_range: ""
+      age_range: "",
+      email: "",
+      username: "",
+      tel: "",
+      age: 0
     };
   },
   // asyncData: async function() {
@@ -115,7 +153,46 @@ export default {
           this.message = "ERROR!";
           this.json_data = {};
         });
+    },
+    getData: function() {
+      axios
+        .get(all_url + ".json")
+        .then(res => {
+          this.message = "get all data";
+          this.json_data = res.data;
+        })
+        .catch(error => {
+          this.message = "ERROR!";
+          this.json_data = {};
+        });
+    },
+    addData: function(event) {
+      let add_url = all_url + "/" + this.email + ".json";
+      let data = {
+        name: this.username,
+        age: this.age,
+        tel: this.tel
+      };
+      axios.put(add_url, data).then(re => {
+        this.email = "";
+        this.username = "";
+        this.age = 0;
+        this.tel = "";
+        this.getData();
+      });
+    },
+    deleteData: function(event) {
+      let del_url = all_url + "/" + this.email + ".json";
+
+      axios.delete(del_url).then(re => {
+        this.message = this.message + "を削除しました。";
+        this.email = "";
+        this.getData();
+      });
     }
+  },
+  created: function() {
+    this.getData();
   }
 };
 </script>

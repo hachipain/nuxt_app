@@ -1,11 +1,12 @@
 <template>
   <section class="container">
-    <h1>{{title}}</h1>
-    <p>{{message}}</p>
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
     <router-link to="/other">Go to Other</router-link>
     <router-link to="/axios">Go to Axios</router-link>
+    <router-link to="/auth">Go to Auth</router-link>
     <hr />
-    <pre>[{{now}}]</pre>
+    <pre>[{{ now }}]</pre>
     <hr />
     <hr />
     <p>{{ $store.state.message }}</p>
@@ -17,7 +18,9 @@
       @click.meta.exact="$store.commit({type:'count',message:'add 10!', add:10})"
     >-->
     <div class="link" @click="$store.dispatch('doit')">
-      <a @click.stop="$store.commit('reset')">clicked: {{$store.state.counter}}</a>
+      <a @click.stop="$store.commit('reset')"
+        >clicked: {{ $store.state.counter }}</a
+      >
     </div>
   </section>
 </template>

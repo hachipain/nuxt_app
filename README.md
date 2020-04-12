@@ -9,6 +9,8 @@ $ npx create-nuxt-app nuxt_app
 $ npm install vuex-persistedstate
 
 $ npm install --save axios
+
+$ npm install firebase --save
 ```
 
 ## Build Setup
